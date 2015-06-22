@@ -9,10 +9,13 @@ router.get('/', function(req, res) {
 
 //Definición de rutas de quizes
 
-router.get('/quizes',                      quizController.index);
-router.get('/quizes/:quizId(\\d+)',        quizController.show);
-router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
-
+router.get('/quizes',                         quizController.index);
+router.get('/quizes/:quizId(\\d+)',           quizController.show);
+router.get('/quizes/:quizId(\\d+)/answer',    quizController.answer);
+router.get('/quizes/add',                     quizController.add);
+router.get('/quizes/addreg',                  quizController.addreg);
+router.get('/quizes/search',                  quizController.search);
+router.get('/quizes/searchshow',              quizController.searchshow);
 
 //GET /author
 router.get('/author',function(req,res){
