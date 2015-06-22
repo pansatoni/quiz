@@ -70,7 +70,6 @@ exports.searchshow=function(req,res){
 
 
 
-
 //GET /quizes/:id/answer
 exports.answer=function(req,res){
     models.Quiz.find(req.params.quizId).then(function(quiz){
