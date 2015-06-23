@@ -27,6 +27,26 @@ exports.show=function(req,res){
     res.render('quizes/show',{quiz: req.quiz});
 };
 
+//GET /quizes/new
+exports.new = function(req,res) {
+    var quiz=models.Quiz.build(//crea objeto quiz
+     {pregunta:"Pregunta",respuesta:"Respuesta"}
+                         );
+    res.render('quizes/new',{quiz:quiz
+    });
+};
+
+// POST /quizes/create
+exports.create=function(req,res) {
+        var quiz=models.Quiz.build(req.body.quiz);
+        console.log(quiz);
+        //guarda en DB los campos pregunta y respuesta de quiz
+        quiz.save({fields:["pregunta","respuesta"]}).then (function(){
+            console.log('redirecciona a /quizes');
+            res.redirect('/quizes');
+        })
+};
+
 //GET /quizes/:id/add
 exports.add=function(req,res){
     console.log('vamos a mostrar add');

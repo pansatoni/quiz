@@ -19,7 +19,10 @@ router.get('/quizes/:quizId(\\d+)/answer',    quizController.answer);
 router.get('/quizes/add',                     quizController.add);
 router.get('/quizes/addreg',                  quizController.addreg);
 router.get('/quizes/search',                  quizController.search);
-router.get('/quizes/searchshow',              quizController.searchshow)
+router.get('/quizes/searchshow',              quizController.searchshow);
+router.get('/quizes/new',                     quizController.new);
+router.post('/quizes/create',                  quizController.create);
+
 
 //GET /author
 router.get('/author',function(req,res){
