@@ -14,6 +14,24 @@ exports.load = function(req,res,next,quizId){
          ).catch(function (error){ next(error);});
 };
 
+//PUT /quizes/:id
+exports.update=function(req,res){
+    req.quiz.pregnta=req.body.quiz.pregunta;
+    req.quiz.respuesta=req.body.quiz.respuesta;
+    
+    req.quiz.validate().then(function(err){
+        if(err){
+            res.render('/quizes/edit',{quiz:req.quiz,errors:err.errors});
+        }
+        else
+        {
+            req.quiz
+            .save({fields:["pregunta","respuesta"]})
+            .then (function(){res.redirect("/quizes");});
+        }
+    });
+};
+
 //GET /quizes
 exports.index=function(req,res){
     models.Quiz.findAll().then(function(quizes){
@@ -40,7 +58,7 @@ exports.new = function(req,res) {
 exports.create=function(req,res) {
         var quiz=models.Quiz.build(req.body.quiz);
         console.log('Vamos a validar: ');
-        err =quiz.validate();//.then (function(err){
+        quiz.validate().then (function(err){
             console.log(err);
             if(err!=null){
                     var errors=[];
@@ -50,7 +68,7 @@ exports.create=function(req,res) {
                         
                     }
                 console.log('errors: '+errors+'->longitud: '+ errors.length);    
-                res.render('quizes/new',{quiz:quiz,errors:errors});
+                res.render('quizes/new',{quiz:quiz,errors:err.errors});
             }else{
                 console.log('estamos en else'+ err);
                 //guarda en DB los campos pregunta y respuesta de quiz
@@ -60,9 +78,16 @@ exports.create=function(req,res) {
                 }
         );
         }
-//});
+});
 };
-        
+
+//GET /quizes/:id/edit
+exports.edit= function(req,res){
+    var quiz=req.quiz; //autoload de instancia de quiz
+    res.render('quizes/edit',{quiz:quiz,errors:[]});
+    
+};
+
 //GET /quizes/:id/add
 exports.add=function(req,res){
     console.log('vamos a mostrar add');

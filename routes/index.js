@@ -21,8 +21,9 @@ router.get('/quizes/addreg',                  quizController.addreg);
 router.get('/quizes/search',                  quizController.search);
 router.get('/quizes/searchshow',              quizController.searchshow);
 router.get('/quizes/new',                     quizController.new);
+router.get('/quizes/:quizId(\\d+)/edit',      quizController.edit);
 router.post('/quizes/create',                 quizController.create);
-
+router.put('/quizes/:quizId(\\d+)',           quizController.update);
 
 //GET /author
 router.get('/author',function(req,res){
