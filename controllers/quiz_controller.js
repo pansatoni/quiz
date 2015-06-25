@@ -18,7 +18,7 @@ exports.load = function(req,res,next,quizId){
 exports.update=function(req,res){
     req.quiz.pregunta=req.body.quiz.pregunta;
     req.quiz.respuesta=req.body.quiz.respuesta;
-    
+    req.quiz.categoria=req.body.quiz.categoria;
     req.quiz.validate().then(function(err){
         if(err){
             res.render('/quizes/edit',{quiz:req.quiz,errors:err.errors});
@@ -26,7 +26,7 @@ exports.update=function(req,res){
         else
         {
             req.quiz
-            .save({fields:["pregunta","respuesta"]})
+            .save({fields:["pregunta","respuesta","categoria"]})
             .then (function(){res.redirect("/quizes");});
         }
     });
@@ -55,7 +55,7 @@ exports.show=function(req,res){
 //GET /quizes/new
 exports.new = function(req,res) {
     var quiz=models.Quiz.build(//crea objeto quiz
-     {pregunta:"Pregunta",respuesta:"Respuesta"}
+     {pregunta:"Pregunta",respuesta:"Respuesta",categoria:"Categoria"}
                          );
     res.render('quizes/new',{quiz:quiz,errors:[]
     });
@@ -79,7 +79,7 @@ exports.create=function(req,res) {
             }else{
                 console.log('estamos en else'+ err);
                 //guarda en DB los campos pregunta y respuesta de quiz
-                quiz.save({fields:["pregunta","respuesta"]}).then (function(){
+                quiz.save({fields:["pregunta","respuesta","categoria"]}).then (function(){
                 //console.log('redirecciona a /quizes');
                 res.redirect('/quizes');
                 }
@@ -110,7 +110,7 @@ exports.addreg=function(req,res){
     //console.log('vamos a mostrar add');
     //res.render('quizes/add');
     console.log('Pregunta:'+req.query.pregunta+ ' Respuesta: '+req.query.respuesta);
-    models.Quiz.create({pregunta:req.query.pregunta,respuesta:req.query.respuesta}).then(function(quiz){
+    models.Quiz.create({pregunta:req.query.pregunta,respuesta:req.query.respuesta,categoria:req.query.categoria}).then(function(quiz){
         //res.render('quizes/add',{quiz:quiz});
         console.log('pregunta '+ quiz.pregunta+' creada correctamente');
         res.render('quizes/addreg',{quiz: quiz,errors:[]});

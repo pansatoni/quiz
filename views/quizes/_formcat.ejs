@@ -1,0 +1,15 @@
+Categoria:
+<select name="quiz[categoria]">
+  <% var temas=['Otro','Humanidades','Ocio','Ciencia','Tecnologia'] %>
+  <%   for(var i=0;i<5;i++){ %>
+  <%      if (temas[i]!== quiz.categoria){ %>
+                <option value="<%= temas[i]%>"  > <%= temas[i] %> </option>
+    <% }else{ %>
+                <option value="<%= temas[i] %>" selected> <%= temas[i] %> </option>
+<% }} %>  
+</select>
+<br><br>
+
+<!--
+
+-->

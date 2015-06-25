@@ -7,10 +7,14 @@ module.exports=function(sequelize,DataTypes){
                                 type:DataTypes.STRING,
                                 validate: { notEmpty: {args:true,msg:"-Falta Pregunta"}}
                             },
-                             respuesta:{
+                            respuesta:{
                                  type:DataTypes.STRING,
                                  validate: { notEmpty: {args:true,msg:"  -Falta Respuesta"}}                                   
-                             }
+                             },
+                             categoria:{
+                                type:DataTypes.ENUM('Otro','Ocio','Humanidades','Ciencia','Tecnologia'),
+                                validate: { isIn:[[ 'Otro','Ocio','Humanidades','Ciencia','Tecnologia']]}
+                            }
                             }   
                      );
         }
