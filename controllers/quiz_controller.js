@@ -16,7 +16,7 @@ exports.load = function(req,res,next,quizId){
 
 //PUT /quizes/:id
 exports.update=function(req,res){
-    req.quiz.pregnta=req.body.quiz.pregunta;
+    req.quiz.pregunta=req.body.quiz.pregunta;
     req.quiz.respuesta=req.body.quiz.respuesta;
     
     req.quiz.validate().then(function(err){
@@ -30,6 +30,13 @@ exports.update=function(req,res){
             .then (function(){res.redirect("/quizes");});
         }
     });
+};
+
+//DELETE /quizes/:id
+exports.destroy=function(req,res){
+    req.quiz.destroy().then(function(){
+        res.redirect('/quizes');
+    }).catch(function(error){next(error)});
 };
 
 //GET /quizes
