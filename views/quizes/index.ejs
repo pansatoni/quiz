@@ -1,7 +1,24 @@
 <table>
 <% var i; for (i=0;i<quizes.length;i++){ %>
     <tr>
-    <td><button disabled style="color:#666"><%= quizes[i].categoria %></button></td>
+    <% 
+    var tcolor='grey';
+    switch (quizes[i].categoria) {
+        case "Humanidades":
+            tcolor='red';
+            break;
+        case "Ocio":
+            tcolor='yellow';
+            break;
+        case "Ciencia":
+            tcolor='green';
+            break;
+        case "Tecnologia":
+            tcolor='blue';
+            break;
+            } 
+    %>
+    <td><label class="redondo" style="background:<%= tcolor %>;color:white" disabled><%= quizes[i].categoria %></label></td> 
     <td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
     <td><a href="/quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
      <td>
@@ -13,3 +30,6 @@
 <% } %>    
 </table><p>
 <a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<br><br>
+
+
