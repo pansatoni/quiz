@@ -16,5 +16,5 @@ footer                  {background:#eee;
 nav span                { margin: 0px 10 px 0px 0px;}
 #ErrorMsgs              {color:#f61;
                          font-size:smaller}     
-.redondo                { border-radius: 5px 5px 5px 5px;
-
+.redondo                { border-radius: 5px 5px 5px 5px;}
+.right                  {float:right;}
