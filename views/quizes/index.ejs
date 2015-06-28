@@ -2,6 +2,7 @@
 <% var i; for (i=0;i<quizes.length;i++){ %>
     <tr>
     <% 
+    console.log('valor de i= '+i);
     var tcolor='grey';
     switch (quizes[i].categoria) {
         case "Humanidades":
@@ -16,7 +17,7 @@
         case "Tecnologia":
             tcolor='blue';
             break;
-            } 
+            };
     %>
     <td><label class="redondo" style="background:<%= tcolor %>;color:white" disabled><%= quizes[i].categoria %></label></td> 
     <td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
@@ -27,10 +28,11 @@
             <button type="submit" onClick ="return confirm('Borrar: <%= quizes[i].pregunta %>');">borrar</button> 
         </form>
     </td>
-    <%}%>
+    <%};%>
     </tr>
 <% } %>    
-</table><p>
+</table>
+
 <%if(session.user){%>
 <a href="/quizes/new"><button type="button">Crear pregunta</button></a>
 <br><br>
