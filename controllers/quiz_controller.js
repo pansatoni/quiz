@@ -162,4 +162,3 @@ exports.answer=function(req,res){
     }
       res.render('quizes/answer',{quiz:req.quiz,respuesta:resultado,errors:[]});
 };
-

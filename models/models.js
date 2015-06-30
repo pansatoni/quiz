@@ -56,3 +56,5 @@ sequelize.sync().then(function(){
         }
     });
 });
+
+

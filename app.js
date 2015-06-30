@@ -42,6 +42,21 @@ app.use(function(req,res,next){
     next();
 });
 
+// autologout
+app.use(function(req,res,next){
+    if(req.session.user){
+    var diferencia=Date.now()-req.session.user.ultima;
+    console.log('anterior: '+req.session.user.ultima+' ahora: '+ Date.now()+'-> '+ diferencia);
+    var ultimoAcceso= Date.now();
+    if( ultimoAcceso - req.session.user.ultima > 2*60*1000){
+        delete req.session.user;
+        res.redirect('/login');
+        return;
+    } 
+    req.session.user.ultima=ultimoAcceso;
+    }
+    next();
+});
 
 app.use('/', routes);
 // eliminado: app.use('/users', users);
@@ -80,5 +95,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
 
